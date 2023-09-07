@@ -43,7 +43,7 @@ namespace BackendAPI.Controllers
             return Created($"/personitems/{dbPerson.Id}", dbPerson);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> EditPerson(int id, PersonDTO person)
         {
             try
@@ -57,7 +57,7 @@ namespace BackendAPI.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePerson(int id)
         {
             try

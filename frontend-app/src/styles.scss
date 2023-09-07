@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* This needs to happen before we import the bootstrap scss to change the themes */
+$primary:     rgb(190, 37, 29);
+$secondary:   rgb(211, 211, 211);
+$danger:       rgb(226, 213, 177);
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+.my-1px { margin: 1px 0 }
+
+.flex-1 { flex: 1 }
+
+.hr {
+    height: 3px;
+    background-color: $primary;
+}
+.leftcolumn { background-color: rgb(248, 248, 248); }
