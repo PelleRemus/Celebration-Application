@@ -1,8 +1,10 @@
-<img src="assets/banner.png" width="100%">
-<div class="bg-secondary my-1px">
+<div class="bg-danger">
+    <div class="container"><img src="assets/banner.png" width="100%"></div>
+</div>
+<div class="bg-secondary mt-1px mb-1">
     <div class="container">
         <ul ngbNav class="nav-tabs pt-2">
-            <li ngbNavItem>
+            <li ngbNavItem class="d-flex align-items-end">
                 <a class="navbar-brand" routerLink="home">
                     <img src="assets/logo.png" height="32px">
                 </a>
@@ -14,6 +16,9 @@
                 <a ngbNavLink routerLink="profile/1" routerLinkActive="active"><b>Profile Page</b></a>
             </li>
             <li ngbNavItem class="ms-auto">
+                <a ngbNavLink routerLink="add-profile" routerLinkActive="active"><b>Add Profile</b></a>
+            </li>
+            <li ngbNavItem>
                 <a ngbNavLink routerLink="login" routerLinkActive="active"><b>Login</b></a>
             </li>
         </ul>

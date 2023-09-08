@@ -14,9 +14,9 @@ namespace Business.Implementations
             _personRepo = personRepo;
         }
 
-        public async Task<IEnumerable<PersonDTO>> GetAllPeople()
+        public async Task<IEnumerable<PersonOverviewDTO>> GetAllPeople()
         {
-            return (await _personRepo.GetAllPeople()).Select(t => new PersonDTO(t));
+            return (await _personRepo.GetAllPeople()).Select(t => new PersonOverviewDTO(t));
         }
 
         public async Task<PersonDTO> GetOnePerson(int id)

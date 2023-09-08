@@ -4,7 +4,7 @@ namespace Business.Interfaces
 {
     public interface IPersonService
     {
-        Task<IEnumerable<PersonDTO>> GetAllPeople();
+        Task<IEnumerable<PersonOverviewDTO>> GetAllPeople();
         Task<PersonDTO> GetOnePerson(int id);
         Task<PersonDTO> PostPerson(PersonDTO person);
         Task EditPerson(int id, PersonDTO inputPerson);

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Person } from '../domain/person';
 import { Observable } from 'rxjs';
+import { PersonOverview } from '../domain/personOverview';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class PeopleService {
 
   constructor(private client: HttpClient) { }
   
-  getAllPeople(): Observable<Person[]> {
-    return this.client.get<Person[]>(`${this.baseUrl}${this.endpoint}`);
+  getAllPeople(): Observable<PersonOverview[]> {
+    return this.client.get<PersonOverview[]>(`${this.baseUrl}${this.endpoint}`);
   }
 
   getOnePerson(id: number): Observable<Person> {

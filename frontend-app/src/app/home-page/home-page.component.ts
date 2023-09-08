@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Person } from '../domain/person';
 import { PeopleService } from '../services/people.service';
+import { PersonOverview } from '../domain/personOverview';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +9,7 @@ import { PeopleService } from '../services/people.service';
 })
 export class HomePageComponent {
 
-  peopleList: Person[] = [];
+  peopleList: PersonOverview[] = [];
 
   constructor(private peopleService: PeopleService) {
     this.getPeople();

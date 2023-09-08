@@ -16,7 +16,7 @@ namespace BackendAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PersonDTO>>> GetAllPeople()
+        public async Task<ActionResult<IEnumerable<PersonOverviewDTO>>> GetAllPeople()
         {
             var people = await _personService.GetAllPeople();
             return Ok(people);
@@ -58,7 +58,7 @@ namespace BackendAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeletePerson(int id)
+        public async Task<ActionResult<PersonDTO>> DeletePerson(int id)
         {
             try
             {

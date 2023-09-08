@@ -4,11 +4,13 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { CreateProfilePageComponent } from './create-profile-page/create-profile-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'add-profile', component: CreateProfilePageComponent },
   { path: 'profile/:id', component: ProfilePageComponent },
   { path: '**', component: NotFoundPageComponent },
 ];
