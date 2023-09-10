@@ -12,19 +12,21 @@ namespace Common.Entities
         public string Password { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         public int DaysBeforeNotice { get; set; }
+        public string Role { get; set; } = null!;
 
         public Person() { }
 
-        public Person(PersonDTO person)
+        public Person(InputPersonDTO person)
         {
             Id = person.Id;
             FirstName = person.FirstName;
             LastName = person.LastName;
             UserName = person.UserName;
             Email = person.Email;
-            Password = person.Password;
+            Password = person.Password!;
             BirthDate = person.BirthDate;
             DaysBeforeNotice = person.DaysBeforeNotice;
+            Role = person.IsAdmin ? Roles.Admin.ToString() : Roles.User.ToString();
         }
     }
 }

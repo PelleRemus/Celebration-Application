@@ -27,6 +27,16 @@ namespace Repository.Implementations
             return person;
         }
 
+        public async Task<Person> LoginPerson(string userName, string password)
+        {
+            Person? person = await _dbContext.People.FirstOrDefaultAsync(p =>
+                p.UserName == userName && p.Password == password);
+            if (person == null)
+                throw new KeyNotFoundException($"UserName or password are incorrect!");
+
+            return person;
+        }
+
         public async Task<Person> PostPerson(Person person)
         {
             _dbContext.People.Add(person);
@@ -44,9 +54,12 @@ namespace Repository.Implementations
             person.LastName = inputPerson.LastName;
             person.UserName = inputPerson.UserName;
             person.Email = inputPerson.Email;
-            person.Password = inputPerson.Password;
             person.BirthDate = inputPerson.BirthDate;
             person.DaysBeforeNotice = inputPerson.DaysBeforeNotice;
+            person.Role = inputPerson.Role;
+
+            if (inputPerson.Password != null)
+                person.Password = inputPerson.Password;
 
             await _dbContext.SaveChangesAsync();
         }

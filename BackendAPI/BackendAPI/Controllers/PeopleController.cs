@@ -1,6 +1,8 @@
 ﻿using Business.Interfaces;
 using Common.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BackendAPI.Controllers
 {
@@ -16,13 +18,30 @@ namespace BackendAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<PersonOverviewDTO>>> GetAllPeople()
         {
             var people = await _personService.GetAllPeople();
             return Ok(people);
         }
 
+        [HttpGet("current")]
+        [Authorize]
+        public async Task<ActionResult<PersonDTO>> GetCurrentUser()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+            if (identity != null)
+            {
+                var userClaims = identity.Claims;
+                int userId = int.Parse(userClaims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "0");
+                return Ok(await _personService.GetOnePerson(userId));
+            }
+            return NotFound();
+        }
+
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<PersonDTO>> GetOnePerson(int id)
         {
             try
@@ -37,14 +56,16 @@ namespace BackendAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostPerson(PersonDTO person)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> PostPerson(InputPersonDTO person)
         {
             var dbPerson = await _personService.PostPerson(person);
             return Created($"/personitems/{dbPerson.Id}", dbPerson);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> EditPerson(int id, PersonDTO person)
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> EditPerson(int id, InputPersonDTO person)
         {
             try
             {
@@ -58,6 +79,7 @@ namespace BackendAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<PersonDTO>> DeletePerson(int id)
         {
             try

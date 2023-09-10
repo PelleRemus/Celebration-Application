@@ -6,8 +6,8 @@ namespace Business.Interfaces
     {
         Task<IEnumerable<PersonOverviewDTO>> GetAllPeople();
         Task<PersonDTO> GetOnePerson(int id);
-        Task<PersonDTO> PostPerson(PersonDTO person);
-        Task EditPerson(int id, PersonDTO inputPerson);
+        Task<PersonDTO> PostPerson(InputPersonDTO person);
+        Task EditPerson(int id, InputPersonDTO inputPerson);
         Task<PersonDTO> DeletePerson(int id);
     }
 }

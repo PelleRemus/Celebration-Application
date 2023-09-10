@@ -24,12 +24,12 @@ namespace Business.Implementations
             return new PersonDTO(await _personRepo.GetOnePerson(id));
         }
 
-        public async Task<PersonDTO> PostPerson(PersonDTO person)
+        public async Task<PersonDTO> PostPerson(InputPersonDTO person)
         {
             return new PersonDTO(await _personRepo.PostPerson(new Person(person)));
         }
 
-        public async Task EditPerson(int id, PersonDTO inputPerson)
+        public async Task EditPerson(int id, InputPersonDTO inputPerson)
         {
             await _personRepo.EditPerson(id, new Person(inputPerson));
         }

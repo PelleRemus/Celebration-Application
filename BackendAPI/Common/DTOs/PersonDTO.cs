@@ -9,9 +9,9 @@ namespace Common.DTOs
         public string LastName { get; set; } = null!;
         public string UserName { get; set; } = null!;
         public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
         public DateTime BirthDate { get; set; }
         public int DaysBeforeNotice { get; set; }
+        public bool IsAdmin { get; set; }
 
         public PersonDTO() { }
 
@@ -22,9 +22,9 @@ namespace Common.DTOs
             LastName = person.LastName;
             UserName = person.UserName;
             Email = person.Email;
-            Password = person.Password;
             BirthDate = person.BirthDate;
             DaysBeforeNotice = person.DaysBeforeNotice;
+            IsAdmin = person.Role == Roles.Admin.ToString();
         }
     }
 }
