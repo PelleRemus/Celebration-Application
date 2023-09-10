@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../domain/person';
 import { PeopleService } from '../services/people.service';
+import { Router } from '@angular/router';
+import { InterceptorService } from '../services/interceptor.service';
 
 @Component({
   selector: 'app-create-profile-page',
@@ -12,8 +14,14 @@ export class CreateProfilePageComponent {
 
   addProfileForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private peopleService: PeopleService) {
-    this.initializeForm();
+  constructor(private formBuilder: FormBuilder,
+    private peopleService: PeopleService,
+    private tokenService: InterceptorService,
+    private router: Router) {
+      if(tokenService.getRole() != "Admin") {
+        router.navigate(['/forbidden'])
+      }
+      this.initializeForm();
   }
 
   initializeForm(): void {
@@ -42,10 +50,15 @@ export class CreateProfilePageComponent {
         email: this.addProfileForm.get("email")?.value,
         password: this.addProfileForm.get("password")?.value,
         birthDate: birthDate,
-        daysBeforeNotice: +this.addProfileForm.get("daysBeforeNotice")?.value
+        daysBeforeNotice: +this.addProfileForm.get("daysBeforeNotice")?.value,
+        isAdmin: this.addProfileForm.get("isAdmin")?.value == true
       } as Person;
 
-      this.peopleService.postPerson(person).subscribe(res => {});
+      this.peopleService.postPerson(person).subscribe(res => {
+        this.router.navigate(['/']);
+      });
+    } else {
+      console.log('not valid');
     }
   }
 }

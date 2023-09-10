@@ -13,15 +13,17 @@
                 <a class="ms-3" ngbNavLink routerLink="home" routerLinkActive="active"><b>Home</b></a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink routerLink="profile/1" routerLinkActive="active"><b>Profile Page</b></a>
+                <a ngbNavLink routerLink="profile/current" routerLinkActive="active"><b>Profile Page</b></a>
             </li>
-            <li ngbNavItem class="ms-auto">
+            <li ngbNavItem class="ms-auto" *ngIf="role == 'Admin'">
                 <a ngbNavLink routerLink="add-profile" routerLinkActive="active"><b>Add Profile</b></a>
             </li>
-            <li ngbNavItem>
-                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>Login</b></a>
+            <li ngbNavItem [class.ms-auto]="role != 'Admin'">
+                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>{{role ? "Logout" : "Login"}}</b></a>
             </li>
         </ul>
     </div>
 </div>
-<div class="container hr mb-4"></div>
+<div class="container mb-4">
+    <div class="hr"></div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
@@ -18,6 +18,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CreateProfilePageComponent } from './create-profile-page/create-profile-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { PeopleService } from './services/people.service';
+import { LoginService } from './services/login.service';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,15 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     NgbModule,
     NgxBootstrapIconsModule.pick(icons)
   ],
-  providers: [],
+  providers: [
+    PeopleService,
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

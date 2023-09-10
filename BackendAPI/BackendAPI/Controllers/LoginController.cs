@@ -39,7 +39,7 @@ namespace BackendAPI.Controllers
             }
         }
 
-        private string GenerateToken(PersonDTO user)
+        private TokenDTO GenerateToken(PersonDTO user)
         {
             var securityKey = Encoding.UTF8.GetBytes(_config["Jwt:Key"] ?? "");
             var credentials = new SigningCredentials(new SymmetricSecurityKey(securityKey), SecurityAlgorithms.HmacSha256);
@@ -56,7 +56,13 @@ namespace BackendAPI.Controllers
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new TokenDTO
+            {
+                Value = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiry = DateTime.Now.AddDays(7),
+                UserId = user.Id,
+                UserRole = user.IsAdmin ? Roles.Admin.ToString() : Roles.User.ToString()
+            };
         }
     }
 }

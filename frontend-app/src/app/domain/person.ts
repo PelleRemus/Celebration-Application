@@ -7,4 +7,5 @@ export interface Person {
     password: string;
     birthDate: Date;
     daysBeforeNotice: number;
+    isAdmin: boolean;
 }

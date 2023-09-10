@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PeopleService } from '../services/people.service';
-import { PersonOverview } from '../domain/personOverview';
+import { PersonOverview } from '../domain/person-overview';
 
 @Component({
   selector: 'app-home-page',
