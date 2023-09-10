@@ -42,6 +42,7 @@ namespace BackendAPI
 
             // Services
             builder.Services.AddScoped<IPersonService, PersonService>();
+            builder.Services.AddScoped<INotificationsService, NotificationsService>();
 
             builder.Services.AddSwaggerGen();
 

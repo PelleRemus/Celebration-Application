@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Birthday Invitation</title>
+</head>
+<body>
+    <p>Dear colleagues,</p>
+
+    <div>I hope this email finds you well! 🌟</div>
+
+    <p>We're excited to let you know that @Model.FirstName @Model.LastName's birthday is just around the corner,
+        and we're gearing up for a fantastic celebration. As a colleague and friend, we wanted to
+        make sure you're in the loop and have the chance to join in the festivities.</p>
+
+    <div><strong>Birthday Details:</strong></div>
+    <ul>
+        <li>Date: @Model.BirthdayDate.ToString("m")</li>
+        <li>Time: 12:30 PM</li>
+        <li>Location: At the office</li>
+    </ul>
+
+    <p>We believe that birthdays should be filled with joy, laughter, and cherished moments.
+        @Model.FirstName has always been an incredible person, and this is the perfect opportunity
+        to show our appreciation and make their day extra special.</p>
+
+    <p><strong>How You Can Get Involved:</strong></p>
+    <ul>
+        <li>RSVP by @Model.BirthdayDate.AddDays(-2).ToString("m") EOD so we can save you a seat!</li>
+        <li>If you'd like to contribute to a group gift, please let us know.</li>
+        <li>Prepare a heartfelt message or a fun birthday wish to share during the celebration.</li>
+    </ul>
+
+    <div>Your presence and warm wishes will mean the world to @Model.FirstName,
+        so we hope to see you there to celebrate this wonderful occasion together.</div>
+
+    <div>If you have any questions or need more information, feel free to reach out.</div>
+
+    <p>Let's make @Model.FirstName's birthday unforgettable! 🥳🎈</p>
+
+    <div>Warmest regards,</div>
+    <div>The PixelData Team</div>
+</body>
+</html>
