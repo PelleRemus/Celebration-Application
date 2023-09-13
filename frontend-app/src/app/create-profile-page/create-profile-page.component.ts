@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Person } from '../domain/person';
-import { PeopleService } from '../services/people.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { Person } from '../domain/person';
+import { confirmPasswordValidator } from '../domain/confirm-password-validator'
+import { PeopleService } from '../services/people.service';
 import { InterceptorService } from '../services/interceptor.service';
+import { passwordValidator } from '../domain/password-validator';
 
 @Component({
   selector: 'app-create-profile-page',
@@ -13,9 +16,9 @@ import { InterceptorService } from '../services/interceptor.service';
 export class CreateProfilePageComponent {
 
   addProfileForm: FormGroup = new FormGroup({});
+  submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder,
-    private peopleService: PeopleService,
+  constructor(private peopleService: PeopleService,
     private tokenService: InterceptorService,
     private router: Router) {
       if(tokenService.getRole() != "Admin") {
@@ -25,20 +28,22 @@ export class CreateProfilePageComponent {
   }
 
   initializeForm(): void {
-    this.addProfileForm = this.formBuilder.group({
-      firstName: [ "", [Validators.required] ],
-      lastName: [ "", [Validators.required] ],
-      userName: [ "", [Validators.required] ],
-      email: [ "", [Validators.required, Validators.email] ],
-      password: [ "", [Validators.required] ],
-      confirmPassword: [ "", [Validators.required] ],
-      birthDate: [ "", [Validators.required] ],
-      daysBeforeNotice: [ "", [Validators.required, Validators.min(1)] ],
-      isAdmin: [ "", [] ]
-    });
+    this.addProfileForm = new FormGroup({
+      firstName: new FormControl<string>("", [Validators.required]),
+      lastName: new FormControl<string>("", [Validators.required]),
+      userName: new FormControl<string>("", [Validators.required]),
+      email: new FormControl<string>("", [Validators.required, Validators.email]),
+      password: new FormControl<string>("", [Validators.required,Validators.minLength(8),passwordValidator]),
+      confirmPassword: new FormControl<string>("", [Validators.required]),
+      birthDate: new FormControl<Date|null>(null, [Validators.required]),
+      daysBeforeNotice: new FormControl<number|null>(null, [Validators.required, Validators.min(2)]),
+      isAdmin: new FormControl<boolean|null>(null, [])
+    }, confirmPasswordValidator);
   }
 
   onSubmit(): void {
+    this.submitted = true;
+
     if (this.addProfileForm.valid) {
       const birthDateObj = this.addProfileForm.get("birthDate")?.value;
       const birthDate = new Date(`${birthDateObj.year}-${birthDateObj.month}-${birthDateObj.day}`);
@@ -57,8 +62,6 @@ export class CreateProfilePageComponent {
       this.peopleService.postPerson(person).subscribe(res => {
         this.router.navigate(['/']);
       });
-    } else {
-      console.log('not valid');
     }
   }
 }

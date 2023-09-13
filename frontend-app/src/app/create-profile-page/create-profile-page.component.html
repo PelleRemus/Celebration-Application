@@ -8,33 +8,66 @@
             <div class="row mb-2">
                 <div class="form-group col-md-6">
                     <label for="firstNameInput">FirstName</label>
-                    <input class="form-control" id="firstNameInput" formControlName="firstName">
+                    <input class="form-control" id="firstNameInput" formControlName="firstName"
+                        [class.is-invalid]="submitted && addProfileForm.controls['firstName'].errors">
+                    <div class="invalid-feedback">FirstName is required</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="lastNameInput">LastName</label>
-                    <input class="form-control" id="lastNameInput" formControlName="lastName">
+                    <input class="form-control" id="lastNameInput" formControlName="lastName"
+                        [class.is-invalid]="submitted && addProfileForm.controls['lastName'].errors">
+                    <div class="invalid-feedback">LastName is required</div>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="form-group col-md-6">
                     <label for="userNameInput">Username</label>
-                    <input class="form-control" id="userNameInput" formControlName="userName">
+                    <input class="form-control" id="userNameInput" formControlName="userName"
+                        [class.is-invalid]="submitted && addProfileForm.controls['userName'].errors">
+                    <div class="invalid-feedback">UserName is required</div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="emailInput">Email</label>
-                    <input type="email" class="form-control" id="emailInput" formControlName="email">
+                    <input type="email" class="form-control" id="emailInput" formControlName="email"
+                        [class.is-invalid]="submitted && addProfileForm.controls['email'].errors">
+                    <div class="invalid-feedback" *ngIf="addProfileForm.controls['email'].errors?.['required']; else emailError">
+                        Email is required</div>
+                    <ng-template #emailError>
+                        <div class="invalid-feedback">Please insert a valid email</div>
+                    </ng-template>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="form-group col-md-6">
                     <label for="passwordInput">Password</label>
-                    <input type="password" class="form-control" id="passwordInput" formControlName="password">
+                    <input type="password" class="form-control" id="passwordInput" formControlName="password"
+                        [class.is-invalid]="submitted && addProfileForm.controls['password'].errors">
+                    <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['required']; else passwordLengthError">
+                        Password is required</div>
+                    <ng-template #passwordLengthError>
+                    <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['minlength']; else passwordError">
+                        Password should have at least 8 characters</div>
+                        <ng-template #passwordError>
+                        <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['lower']">
+                            Password must have at least a lowercase letter</div>
+                        <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['upper']">
+                            Password must have at least an uppercase letter</div>
+                        <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['number']">
+                            Password must have at least a digit</div>
+                        </ng-template>
+                    </ng-template>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="confirmPasswordInput">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPasswordInput" formControlName="confirmPassword">
+                    <input type="password" class="form-control" id="confirmPasswordInput" formControlName="confirmPassword"
+                        [class.is-invalid]="submitted && (addProfileForm.controls['confirmPassword'].errors || addProfileForm.errors)">
+                    <div class="invalid-feedback" *ngIf="addProfileForm.controls['confirmPassword'].errors?.['required']; else confirmPasswordError">
+                        Confirm Password is required</div>
+                    <ng-template #confirmPasswordError>
+                        <div class="invalid-feedback">Confirm Password should match Password</div>
+                    </ng-template>
                 </div>
             </div>
 
@@ -42,15 +75,23 @@
                 <div class="form-group col-md-6">
                     <label for="d">Birth Date</label>
                     <div class="input-group">
-                        <input type="text" ngbDatepicker class="form-control" #d="ngbDatepicker" formControlName="birthDate">
-                        <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                        <input type="text" ngbDatepicker class="form-control" #d="ngbDatepicker" formControlName="birthDate"
+                            [class.is-invalid]="submitted && addProfileForm.controls['birthDate'].errors">
+                        <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                             <i class="d-flex align-items-center" i-bs name="calendar-event"></i>
                         </button>
+                        <div class="invalid-feedback">Birth Date is required</div>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="daysBeforeNoticeInput">Days Before Notice</label>
-                    <input type="number" class="form-control" id="daysBeforeNoticeInput" formControlName="daysBeforeNotice">
+                    <input type="number" class="form-control" id="daysBeforeNoticeInput" formControlName="daysBeforeNotice"
+                        [class.is-invalid]="submitted && addProfileForm.controls['daysBeforeNotice'].errors">
+                    <div class="invalid-feedback" *ngIf="addProfileForm.controls['daysBeforeNotice'].errors?.['required']; else numberError">
+                        Days Before Notice is required</div>
+                    <ng-template #numberError>
+                        <div class="invalid-feedback">Days Before Notice should be at least 2</div>
+                    </ng-template>
                 </div>
             </div>
             <div class="d-flex justify-content-center align-items-center">

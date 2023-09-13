@@ -1,7 +1,8 @@
 /* This needs to happen before we import the bootstrap scss to change the themes */
 $primary:     rgb(190, 37, 29);
-$secondary:   rgb(211, 211, 211);
-$danger:       rgb(226, 213, 177);
+$secondary:   rgb(226, 213, 177);
+$info:        rgb(211, 211, 211);
+$danger:      rgb(190, 37, 29);
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
@@ -16,3 +17,7 @@ $danger:       rgb(226, 213, 177);
     background-color: $primary;
 }
 .leftcolumn { background-color: rgb(248, 248, 248); }
+
+td, th {
+    vertical-align: middle;
+}

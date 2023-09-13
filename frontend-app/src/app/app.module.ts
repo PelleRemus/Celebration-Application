@@ -4,9 +4,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
-import { calendarEvent } from 'ngx-bootstrap-icons';
+import { calendarEvent, clipboardFill, trashFill, pencilFill } from 'ngx-bootstrap-icons';
 const icons = {
-  calendarEvent
+  calendarEvent,
+  clipboardFill,
+  trashFill,
+  pencilFill
 };
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +24,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { PeopleService } from './services/people.service';
 import { LoginService } from './services/login.service';
 import { InterceptorService } from './services/interceptor.service';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { InterceptorService } from './services/interceptor.service';
     LoginPageComponent,
     ProfilePageComponent,
     CreateProfilePageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -3,20 +3,29 @@
         <div class="leftcolumn">
             <img src="assets/circles.png" class="ms-auto">
         </div>
-        <div class="ms-2">
-            <h4 class="text-primary p-2">{{person.firstName | uppercase}} {{person.lastName | uppercase}}'S PROFILE</h4>
+
+        <div class="ms-2" *ngIf="!isEdit; else editForm">
+            <div class="d-flex align-items-center p-2">
+              <h4 class="text-primary m-0">{{person.firstName | uppercase}} {{person.lastName | uppercase}}'S PROFILE</h4>
+              <button class="btn btn-outline-secondary ms-2" *ngIf="role == 'Admin'" (click)="isEdit=true">
+                <i i-bs name="pencil-fill" width="1.5em" height="1.5em"></i>
+              </button>
+            </div>
             <table class="table table-striped table-hover">
               <thead>
-                <tr> <th class="bg-danger"></th>    <th class="bg-danger"></th>     </tr>
+                <tr> <th class="bg-secondary"></th>    <th class="bg-secondary"></th>       </tr>
               </thead>
               <tbody>
-                <tr> <th>Username</th>              <td>{{person.userName}}</td>    </tr>
-                <tr> <th>Email</th>                 <td>{{person.email}}</td>       </tr>
-                <tr> <th>Birth Date</th>            <td>{{person.birthDate}}</td>   </tr>
+                <tr> <th>Username</th>              <td>{{person.userName}}</td>        </tr>
+                <tr> <th>Email</th>                 <td>{{person.email}}</td>           </tr>
+                <tr> <th>Birth Date</th>            <td>{{person.birthDate | date:'longDate'}}</td></tr>
                 <tr> <th>Days Before Notice</th>    <td>{{person.daysBeforeNotice}}</td></tr>
-                <tr> <th>Is Admin</th>              <td>{{person.isAdmin}}</td>     </tr>
+                <tr> <th>Is Admin</th>              <td>{{person.isAdmin}}</td>         </tr>
               </tbody>
             </table>
         </div>
+        <ng-template #editForm>
+          <app-edit-profile [inputPerson]="person" (cancelEvent)="isEdit=false"></app-edit-profile>
+        </ng-template>
     </div>
 </div>
