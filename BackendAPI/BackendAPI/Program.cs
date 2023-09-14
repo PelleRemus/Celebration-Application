@@ -1,5 +1,8 @@
+using BackendAPI.Validators;
 using Business.Implementations;
 using Business.Interfaces;
+using Common.DTOs;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -90,6 +93,9 @@ namespace BackendAPI
             builder.Services.AddScoped<IPersonService, PersonService>();
             builder.Services.AddScoped<INotificationsService, NotificationsService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
+
+            // Validators
+            builder.Services.AddScoped<IValidator<InputPersonDTO>, PersonValidator>();
 
             var app = builder.Build();
 

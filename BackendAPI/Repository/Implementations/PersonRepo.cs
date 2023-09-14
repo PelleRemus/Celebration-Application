@@ -37,16 +37,26 @@ namespace Repository.Implementations
             return person;
         }
 
-        public async Task<Person> PostPerson(Person person)
+        public async Task<Person> PostPerson(Person inputPerson)
         {
-            _dbContext.People.Add(person);
+            Person? person = await _dbContext.People
+                .FirstOrDefaultAsync(p => p.UserName == inputPerson.UserName);
+            if (person is not null)
+                throw new InvalidOperationException($"Username '{inputPerson.UserName}' is already taken");
+
+            _dbContext.People.Add(inputPerson);
             await _dbContext.SaveChangesAsync();
-            return person;
+            return inputPerson;
         }
 
         public async Task EditPerson(int id, Person inputPerson)
         {
-            Person? person = await _dbContext.People.FindAsync(id);
+            Person? person = await _dbContext.People
+                .FirstOrDefaultAsync(p => p.UserName == inputPerson.UserName);
+            if (person is not null)
+                throw new InvalidOperationException($"Username '{inputPerson.UserName}' is already taken");
+
+            person = await _dbContext.People.FindAsync(id);
             if (person is null)
                 throw new KeyNotFoundException($"Could not find person with id {id}");
 
@@ -58,7 +68,7 @@ namespace Repository.Implementations
             person.DaysBeforeNotice = inputPerson.DaysBeforeNotice;
             person.Role = inputPerson.Role;
 
-            if (inputPerson.Password != null)
+            if (!string.IsNullOrEmpty(inputPerson.Password))
                 person.Password = inputPerson.Password;
 
             await _dbContext.SaveChangesAsync();

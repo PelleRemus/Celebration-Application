@@ -47,8 +47,9 @@ export class CreateProfilePageComponent {
     if (this.addProfileForm.valid) {
       const birthDateObj = this.addProfileForm.get("birthDate")?.value;
       const birthDate = new Date(`${birthDateObj.year}-${birthDateObj.month}-${birthDateObj.day}`);
+      birthDate.setHours(8);
 
-      let person = {
+      const person = {
         firstName: this.addProfileForm.get("firstName")?.value,
         lastName: this.addProfileForm.get("lastName")?.value,
         userName: this.addProfileForm.get("userName")?.value,

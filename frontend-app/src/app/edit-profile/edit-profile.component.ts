@@ -70,8 +70,9 @@ export class EditProfileComponent implements OnInit {
     if (this.editProfileForm.valid) {
       const birthDateObj = this.editProfileForm.get('birthDate')?.value;
       const birthDate = new Date(`${birthDateObj.year}-${birthDateObj.month}-${birthDateObj.day}`);
-      
-      let person = {
+      birthDate.setHours(8);
+
+      const person = {
         firstName: this.editProfileForm.get('firstName')?.value,
         lastName: this.editProfileForm.get('lastName')?.value,
         userName: this.editProfileForm.get('userName')?.value,

@@ -1,7 +1,9 @@
 ﻿using Business.Interfaces;
 using Common.DTOs;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace BackendAPI.Controllers
@@ -11,10 +13,12 @@ namespace BackendAPI.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly IPersonService _personService;
+        private readonly IValidator<InputPersonDTO> _validator;
 
-        public PeopleController(IPersonService personService)
+        public PeopleController(IPersonService personService, IValidator<InputPersonDTO> validator)
         {
             _personService = personService;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -59,8 +63,21 @@ namespace BackendAPI.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> PostPerson(InputPersonDTO person)
         {
-            var dbPerson = await _personService.PostPerson(person);
-            return Created($"/personitems/{dbPerson.Id}", dbPerson);
+            try
+            {
+                var validationResult = _validator.Validate(person);
+                if (!validationResult.IsValid)
+                    return BadRequest(validationResult.ToString());
+                if (string.IsNullOrEmpty(person.Password))
+                    return BadRequest("Password is required!");
+
+                var dbPerson = await _personService.PostPerson(person);
+                return Created($"api/[controller]/{dbPerson.Id}", dbPerson);
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut("{id}")]
@@ -69,8 +86,16 @@ namespace BackendAPI.Controllers
         {
             try
             {
+                var validationResult = _validator.Validate(person);
+                if (!validationResult.IsValid)
+                    return BadRequest(validationResult.ToString());
+
                 await _personService.EditPerson(id, person);
                 return NoContent();
+            }
+            catch (InvalidOperationException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (KeyNotFoundException e)
             {

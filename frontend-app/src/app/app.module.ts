@@ -25,6 +25,7 @@ import { PeopleService } from './services/people.service';
 import { LoginService } from './services/login.service';
 import { InterceptorService } from './services/interceptor.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     ProfilePageComponent,
     CreateProfilePageComponent,
     NotFoundPageComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ToastsContainerComponent
   ],
   imports: [
     BrowserModule,

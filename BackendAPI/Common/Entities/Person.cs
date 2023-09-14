@@ -18,7 +18,6 @@ namespace Common.Entities
 
         public Person(InputPersonDTO person)
         {
-            Id = person.Id;
             FirstName = person.FirstName;
             LastName = person.LastName;
             UserName = person.UserName;
