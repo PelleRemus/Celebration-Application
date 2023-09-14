@@ -3,7 +3,6 @@ using Common.DTOs;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace BackendAPI.Controllers
@@ -21,12 +20,15 @@ namespace BackendAPI.Controllers
             _validator = validator;
         }
 
-        [HttpGet]
+        [HttpGet("page/{page}")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<PersonOverviewDTO>>> GetAllPeople()
+        public async Task<ActionResult<PeoplePageDTO>> GetPeoplePaginated(int page)
         {
-            var people = await _personService.GetAllPeople();
-            return Ok(people);
+            if (page < 1)
+                return BadRequest("Page should be at least 1");
+
+            var peoplePage = await _personService.GetPeoplePage(page);
+            return Ok(peoplePage);
         }
 
         [HttpGet("current")]

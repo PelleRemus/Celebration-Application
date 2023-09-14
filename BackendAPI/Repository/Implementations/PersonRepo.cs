@@ -18,6 +18,19 @@ namespace Repository.Implementations
             return await _dbContext.People.ToListAsync();
         }
 
+        public int GetCollectionSize()
+        {
+            return _dbContext.People.Count();
+        }
+
+        public async Task<IEnumerable<Person>> GetPeoplePaginated(int page)
+        {
+            return await _dbContext.People
+                .Skip((page - 1) * 10)
+                .Take(10)
+                .ToListAsync();
+        }
+
         public async Task<Person> GetOnePerson(int id)
         {
             Person? person = await _dbContext.People.FindAsync(id);

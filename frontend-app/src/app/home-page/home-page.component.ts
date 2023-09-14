@@ -5,6 +5,7 @@ import { InterceptorService } from '../services/interceptor.service';
 import { ToastService } from '../services/toast.service';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalConfig } from '../domain/modal-config';
+import { PeoplePage } from '../domain/people-page';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ export class HomePageComponent {
     onClose: () => true,
   } as ModalConfig;
 
-  peopleList: PersonOverview[] = [];
+  peoplePage: PeoplePage = { page: 1 } as PeoplePage;
   toDelete: PersonOverview | undefined;
   role: string = "";
 
@@ -34,16 +35,16 @@ export class HomePageComponent {
   }
 
   getPeople() {
-    this.peopleService.getAllPeople().subscribe(res => {
-      this.peopleList = res;
+    this.peopleService.getPeoplePaginated(this.peoplePage.page).subscribe(res => {
+      this.peoplePage = res;
     });
   }
 
   async deletePerson(id: number) {
-    this.toDelete = this.peopleList.find(p => p.id == id);
+    this.toDelete = this.peoplePage.peopleList.find(p => p.id == id);
     if(await this.openModal()) {
       this.peopleService.deletePerson(id).subscribe(res => {
-        this.peopleList = this.peopleList.filter(p => p.id != id);
+        this.getPeople();
         this.toastService.showSuccess(`Successfully deleted person ${res.firstName} ${res.lastName}`);
       })
     }

@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let person of peopleList">
+          <tr *ngFor="let person of peoplePage.peopleList">
             <th>{{person.id}}</th>
             <td>{{person.firstName}}</td>
             <td>{{person.lastName}}</td>
@@ -31,4 +31,6 @@
           </tr>
         </tbody>
     </table>
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="peoplePage.collectionSize"
+        [(page)]="peoplePage.page" (pageChange)="getPeople()"></ngb-pagination>
 </div>

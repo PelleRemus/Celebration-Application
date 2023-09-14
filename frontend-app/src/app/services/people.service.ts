@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Person } from '../domain/person';
 import { Observable } from 'rxjs';
 import { PersonOverview } from '../domain/person-overview';
+import { PeoplePage } from '../domain/people-page';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class PeopleService {
 
   constructor(private client: HttpClient) { }
   
-  getAllPeople(): Observable<PersonOverview[]> {
-    return this.client.get<PersonOverview[]>(`${this.baseUrl}${this.endpoint}`);
+  getPeoplePaginated(page: number): Observable<PeoplePage> {
+    return this.client.get<PeoplePage>(`${this.baseUrl}${this.endpoint}/page/${page}`);
   }
 
   getOnePerson(id: number): Observable<Person> {
