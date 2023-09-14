@@ -1,5 +1,9 @@
 <div class="container">
     <h4 class="text-primary text-center p-2">EMPLOYEES</h4>
+    <app-modal #modal [modalConfig]="modalConfig">
+        Are you sure you want to delete person <b>{{toDelete?.firstName}} {{toDelete?.lastName}}</b>?
+    </app-modal>
+
     <table class="table table-striped table-hover">
         <thead>
           <tr>

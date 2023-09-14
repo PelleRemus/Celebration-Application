@@ -1,6 +1,10 @@
 <div class="bg-secondary">
     <div class="container"><img src="assets/banner.png" width="100%"></div>
 </div>
+<app-modal #modal [modalConfig]="modalConfig">
+    Are you sure you want to <b>Logout</b>?
+</app-modal>
+
 <div class="bg-info mt-1px mb-1">
     <div class="container">
         <ul ngbNav class="nav-tabs pt-2">
@@ -18,8 +22,11 @@
             <li ngbNavItem class="ms-auto" *ngIf="role == 'Admin'">
                 <a ngbNavLink routerLink="add-profile" routerLinkActive="active"><b>Add Profile</b></a>
             </li>
-            <li ngbNavItem [class.ms-auto]="role != 'Admin'">
-                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>{{role ? "Logout" : "Login"}}</b></a>
+            <li ngbNavItem *ngIf="!role" class="ms-auto">
+                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>Login</b></a>
+            </li>
+            <li ngbNavItem *ngIf="role" [class.ms-auto]="role != 'Admin'">
+                <a ngbNavLink (click)="logout()"><b>Logout</b></a>
             </li>
         </ul>
     </div>

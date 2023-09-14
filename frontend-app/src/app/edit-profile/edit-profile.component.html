@@ -8,7 +8,7 @@
         <form class="ms-2" [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" *ngIf="editProfileForm.get('firstName')">
             <div class="d-flex align-items-center p-2">
                 <h4 class="text-primary m-0">EDIT {{inputPerson.firstName | uppercase}} {{inputPerson.lastName | uppercase}}'S PROFILE</h4>
-                <button class="btn btn-outline-secondary ms-2" routerLink="../">Cancel</button>
+                <button class="btn btn-secondary ms-2" routerLink="../">Cancel</button>
             </div>
             <div class="row mb-2">
                 <div class="form-group col-md-6">

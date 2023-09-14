@@ -21,3 +21,9 @@ $danger:      rgb(190, 37, 29);
 td, th {
     vertical-align: middle;
 }
+
+.modal-dialog {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}

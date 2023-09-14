@@ -27,6 +27,7 @@ import { InterceptorService } from './services/interceptor.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { ToastService } from './services/toast.service';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ToastService } from './services/toast.service';
     CreateProfilePageComponent,
     NotFoundPageComponent,
     EditProfileComponent,
-    ToastsContainerComponent
+    ToastsContainerComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
