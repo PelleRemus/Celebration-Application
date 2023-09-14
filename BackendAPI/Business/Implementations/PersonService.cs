@@ -1,7 +1,9 @@
 ﻿using Business.Interfaces;
 using Common.DTOs;
 using Common.Entities;
+using Common.Helpers;
 using Repository.Interfaces;
+using System;
 
 namespace Business.Implementations
 {
@@ -26,11 +28,19 @@ namespace Business.Implementations
 
         public async Task<PersonDTO> PostPerson(InputPersonDTO person)
         {
+            if (!string.IsNullOrEmpty(person.Password))
+            {
+                person.Password = PasswordHelpers.EncodePasswordToBase64(person.Password);
+            }
             return new PersonDTO(await _personRepo.PostPerson(new Person(person)));
         }
 
         public async Task EditPerson(int id, InputPersonDTO inputPerson)
         {
+            if (!string.IsNullOrEmpty(inputPerson.Password))
+            {
+                inputPerson.Password = PasswordHelpers.EncodePasswordToBase64(inputPerson.Password);
+            }
             await _personRepo.EditPerson(id, new Person(inputPerson));
         }
 

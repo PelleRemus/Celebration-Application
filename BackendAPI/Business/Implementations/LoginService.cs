@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Common.DTOs;
+using Common.Helpers;
 using Repository.Interfaces;
 
 namespace Business.Implementations
@@ -15,7 +16,8 @@ namespace Business.Implementations
 
         public async Task<PersonDTO> Authenticate(UserLoginDTO userLogin)
         {
-            var person = await _personRepo.LoginPerson(userLogin.UserName, userLogin.Password);
+            var passwordHash = PasswordHelpers.EncodePasswordToBase64(userLogin.Password);
+            var person = await _personRepo.LoginPerson(userLogin.UserName, passwordHash);
             return new PersonDTO(person);
         }
     }
