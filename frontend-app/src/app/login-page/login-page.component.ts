@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { UserLogin } from '../domain/user-login';
 import { Router } from '@angular/router';
+import { InterceptorService } from '../services/interceptor.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,9 +15,16 @@ export class LoginPageComponent {
 
   loginForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
-    this.loginService.logout();
-    this.initializeForm();
+  constructor(private formBuilder: FormBuilder,
+    private tokenService: InterceptorService,
+    private loginService: LoginService,
+    private toastService: ToastService,
+    private router: Router) {
+      if(this.tokenService.getToken()) {
+        this.loginService.logout();
+        this.toastService.showSuccess("Successfully logged out!");
+      }
+      this.initializeForm();
   }
 
   initializeForm(): void {
@@ -34,6 +43,7 @@ export class LoginPageComponent {
 
       this.loginService.login(userLogin).subscribe(token => {
         localStorage.setItem("token", JSON.stringify(token));
+        this.toastService.showSuccess("Successfully logged in!");
         this.router.navigate(['/']);
       });
     }

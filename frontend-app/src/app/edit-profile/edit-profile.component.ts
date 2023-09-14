@@ -1,34 +1,37 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Person } from '../domain/person';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PeopleService } from '../services/people.service';
 import { InterceptorService } from '../services/interceptor.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { passwordValidator } from '../domain/password-validator';
 import { confirmPasswordValidator } from '../domain/confirm-password-validator';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent {
 
-  @Input() inputPerson: Person = {} as Person;
-  @Output() cancelEvent = new EventEmitter<boolean>();
+  inputPerson: Person = {} as Person;
   editProfileForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
 
   constructor(private peopleService: PeopleService,
     private tokenService: InterceptorService,
+    private toastService: ToastService,
+    private route: ActivatedRoute,
     private router: Router) {
-      if(tokenService.getRole() != 'Admin') {
+      const id = this.route.snapshot.params['id'];
+      this.peopleService.getOnePerson(id).subscribe(res => {
+        this.inputPerson = res;
+        this.initializeForm();
+      });
+      if(this.tokenService.getRole() != 'Admin') {
         router.navigate(['/forbidden'])
       }
-  }
-
-  ngOnInit(): void {
-    this.initializeForm();
   }
 
   initializeForm(): void {
@@ -84,7 +87,8 @@ export class EditProfileComponent implements OnInit {
       } as Person;
 
       this.peopleService.editPerson(this.inputPerson.id, person).subscribe(res => {
-        window.location.reload()
+        this.toastService.showSuccess(`Successfully edited person ${this.inputPerson.firstName} ${this.inputPerson.lastName}`);
+        this.router.navigate(['profile', this.inputPerson.id]);
       });
     }
   }

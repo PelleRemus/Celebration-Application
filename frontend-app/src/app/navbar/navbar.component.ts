@@ -11,10 +11,9 @@ export class NavbarComponent implements OnDestroy {
   role: string = "";
   interval: any;
 
-  constructor(private tokenService: InterceptorService)
-  {
+  constructor(private tokenService: InterceptorService) {
     this.role = tokenService.getRole();
-    this.interval = setInterval(() => this.role = tokenService.getRole(), 1000);
+    this.interval = setInterval(() => this.role = this.tokenService.getRole(), 1000);
   }
 
   ngOnDestroy(): void {

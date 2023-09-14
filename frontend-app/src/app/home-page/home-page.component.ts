@@ -14,10 +14,11 @@ export class HomePageComponent {
   peopleList: PersonOverview[] = [];
   role: string = "";
 
-  constructor(private peopleService: PeopleService, private tokenService: InterceptorService,
+  constructor(private peopleService: PeopleService,
+    private tokenService: InterceptorService,
     private toastService: ToastService) {
-    this.getPeople();
-    this.role = tokenService.getRole();
+      this.getPeople();
+      this.role = this.tokenService.getRole();
   }
 
   getPeople() {

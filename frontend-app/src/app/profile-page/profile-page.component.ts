@@ -13,14 +13,14 @@ export class ProfilePageComponent {
 
   person: Person = {} as Person;
   role: string = "";
-  isEdit: boolean = false;
 
-  constructor(private peopleService: PeopleService, private route: ActivatedRoute, private tokenService: InterceptorService)
-  {
-    let id = this.route.snapshot.params['id'];
-    peopleService.getOnePerson(id).subscribe(res => {
-      this.person = res;
-    })
-    this.role = tokenService.getRole();
+  constructor(private peopleService: PeopleService,
+    private tokenService: InterceptorService,
+    private route: ActivatedRoute) {
+      let id = this.route.snapshot.params['id'];
+      this.peopleService.getOnePerson(id).subscribe(res => {
+        this.person = res;
+      });
+      this.role = this.tokenService.getRole();
   }
 }

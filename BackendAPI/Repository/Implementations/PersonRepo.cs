@@ -52,6 +52,7 @@ namespace Repository.Implementations
         public async Task EditPerson(int id, Person inputPerson)
         {
             Person? person = await _dbContext.People
+                .Where(p => p.Id != id)
                 .FirstOrDefaultAsync(p => p.UserName == inputPerson.UserName);
             if (person is not null)
                 throw new InvalidOperationException($"Username '{inputPerson.UserName}' is already taken");

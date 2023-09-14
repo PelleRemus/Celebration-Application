@@ -4,10 +4,10 @@
             <img src="assets/circles.png" class="ms-auto">
         </div>
 
-        <div class="ms-2" *ngIf="!isEdit; else editForm">
+        <div class="ms-2">
             <div class="d-flex align-items-center p-2">
               <h4 class="text-primary m-0">{{person.firstName | uppercase}} {{person.lastName | uppercase}}'S PROFILE</h4>
-              <button class="btn btn-outline-secondary ms-2" *ngIf="role == 'Admin'" (click)="isEdit=true">
+              <button class="btn btn-outline-secondary ms-2" *ngIf="role == 'Admin'" routerLink="./edit">
                 <i i-bs name="pencil-fill" width="1.5em" height="1.5em"></i>
               </button>
             </div>
@@ -24,8 +24,5 @@
               </tbody>
             </table>
         </div>
-        <ng-template #editForm>
-          <app-edit-profile [inputPerson]="person" (cancelEvent)="isEdit=false"></app-edit-profile>
-        </ng-template>
     </div>
 </div>

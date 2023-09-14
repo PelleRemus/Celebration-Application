@@ -7,6 +7,7 @@ import { confirmPasswordValidator } from '../domain/confirm-password-validator'
 import { PeopleService } from '../services/people.service';
 import { InterceptorService } from '../services/interceptor.service';
 import { passwordValidator } from '../domain/password-validator';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-create-profile-page',
@@ -20,9 +21,10 @@ export class CreateProfilePageComponent {
 
   constructor(private peopleService: PeopleService,
     private tokenService: InterceptorService,
+    private toastService: ToastService,
     private router: Router) {
-      if(tokenService.getRole() != "Admin") {
-        router.navigate(['/forbidden'])
+      if(this.tokenService.getRole() != "Admin") {
+        this.router.navigate(['/forbidden'])
       }
       this.initializeForm();
   }
@@ -61,6 +63,7 @@ export class CreateProfilePageComponent {
       } as Person;
 
       this.peopleService.postPerson(person).subscribe(res => {
+        this.toastService.showSuccess(`Successfully added person ${res.firstName} ${res.lastName}`);
         this.router.navigate(['/']);
       });
     }

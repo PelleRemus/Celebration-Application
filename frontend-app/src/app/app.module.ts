@@ -26,6 +26,7 @@ import { LoginService } from './services/login.service';
 import { InterceptorService } from './services/interceptor.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
+import { ToastService } from './services/toast.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ToastsContainerComponent } from './toasts-container/toasts-container.co
   ],
   providers: [
     PeopleService,
+    ToastService,
     LoginService,
     {
       provide: HTTP_INTERCEPTORS,
