@@ -1,19 +1,19 @@
 <div class="container py-5 d-flex justify-content-around">
     <div class="d-flex">
         <div class="leftcolumn">
-            <img src="assets/circles.png" class="ms-auto">
+            <img src="assets/images/circles.png" class="ms-auto">
         </div>
         <form class="ms-2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <h4 class="text-primary">LOG IN</h4>
+            <h4 class="text-primary">{{ 'login.header' | transloco }}</h4>
             <div class="form-group mb-2">
-                <label for="usernameInput">Username</label>
+                <label for="usernameInput">{{ 'form.labels.username' | transloco }}</label>
                 <input class="form-control" id="usernameInput" formControlName="userName">
             </div>
             <div class="form-group mb-2">
-                <label for="passwordInput">Password</label>
+                <label for="passwordInput">{{ 'form.labels.password' | transloco }}</label>
                 <input type="password" class="form-control" id="passwordInput" formControlName="password">
             </div>
-            <button class="btn btn-primary" type="submit">Log in</button>
+            <button class="btn btn-primary" type="submit">{{ 'login.button' | transloco }}</button>
         </form>
     </div>
 </div>

@@ -1,104 +1,104 @@
 <div class="container py-5 d-flex justify-content-around">
     <div class="d-flex">
         <div class="leftcolumn">
-            <img src="assets/circles.png" class="ms-auto">
+            <img src="assets/images/circles.png" class="ms-auto">
         </div>
         <form class="ms-2" [formGroup]="addProfileForm" (ngSubmit)="onSubmit()">
-            <h4 class="text-primary text-center">ADD PROFILE</h4>
+            <h4 class="text-primary text-center">{{ 'create-profile.header' | transloco }}</h4>
             <div class="row mb-2">
                 <div class="form-group col-md-6">
-                    <label for="firstNameInput">FirstName</label>
+                    <label for="firstNameInput">{{ 'form.labels.first-name' | transloco }}</label>
                     <input class="form-control" id="firstNameInput" formControlName="firstName"
                         [class.is-invalid]="submitted && addProfileForm.controls['firstName'].errors">
-                    <div class="invalid-feedback">FirstName is required</div>
+                    <div class="invalid-feedback">{{ 'form.validations.required.first-name' | transloco }}</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="lastNameInput">LastName</label>
+                    <label for="lastNameInput">{{ 'form.labels.last-name' | transloco }}</label>
                     <input class="form-control" id="lastNameInput" formControlName="lastName"
                         [class.is-invalid]="submitted && addProfileForm.controls['lastName'].errors">
-                    <div class="invalid-feedback">LastName is required</div>
+                    <div class="invalid-feedback">{{ 'form.validations.required.last-name' | transloco }}</div>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="form-group col-md-6">
-                    <label for="userNameInput">Username</label>
+                    <label for="userNameInput">{{ 'form.labels.username' | transloco }}</label>
                     <input class="form-control" id="userNameInput" formControlName="userName"
                         [class.is-invalid]="submitted && addProfileForm.controls['userName'].errors">
-                    <div class="invalid-feedback">UserName is required</div>
+                    <div class="invalid-feedback">{{ 'form.validations.required.username' | transloco }}</div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="emailInput">Email</label>
+                    <label for="emailInput">{{ 'form.labels.email' | transloco }}</label>
                     <input type="email" class="form-control" id="emailInput" formControlName="email"
                         [class.is-invalid]="submitted && addProfileForm.controls['email'].errors">
                     <div class="invalid-feedback" *ngIf="addProfileForm.controls['email'].errors?.['required']; else emailError">
-                        Email is required</div>
+                        {{ 'form.validations.required.email' | transloco }}</div>
                     <ng-template #emailError>
-                        <div class="invalid-feedback">Please insert a valid email</div>
+                        <div class="invalid-feedback">{{ 'form.validations.email' | transloco }}</div>
                     </ng-template>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="form-group col-md-6">
-                    <label for="passwordInput">Password</label>
+                    <label for="passwordInput">{{ 'form.labels.password' | transloco }}</label>
                     <input type="password" class="form-control" id="passwordInput" formControlName="password"
                         [class.is-invalid]="submitted && addProfileForm.controls['password'].errors">
                     <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['required']; else passwordLengthError">
-                        Password is required</div>
+                        {{ 'form.validations.required.password' | transloco }}</div>
                     <ng-template #passwordLengthError>
                     <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['minlength']; else passwordError">
-                        Password should have at least 8 characters</div>
+                        {{ 'form.validations.password.minimum-length' | transloco }}</div>
                         <ng-template #passwordError>
                         <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['lower']">
-                            Password must have at least a lowercase letter</div>
+                            {{ 'form.validations.password.lowercase' | transloco }}</div>
                         <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['upper']">
-                            Password must have at least an uppercase letter</div>
+                            {{ 'form.validations.password.uppercase' | transloco }}</div>
                         <div class="invalid-feedback" *ngIf="addProfileForm.controls['password'].errors?.['number']">
-                            Password must have at least a digit</div>
+                            {{ 'form.validations.password.digit' | transloco }}</div>
                         </ng-template>
                     </ng-template>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="confirmPasswordInput">Confirm Password</label>
+                    <label for="confirmPasswordInput">{{ 'form.labels.confirm-password' | transloco }}</label>
                     <input type="password" class="form-control" id="confirmPasswordInput" formControlName="confirmPassword"
                         [class.is-invalid]="submitted && (addProfileForm.controls['confirmPassword'].errors || addProfileForm.errors)">
                     <div class="invalid-feedback" *ngIf="addProfileForm.controls['confirmPassword'].errors?.['required']; else confirmPasswordError">
-                        Confirm Password is required</div>
+                        {{ 'form.validations.required.confirm-password' | transloco }}</div>
                     <ng-template #confirmPasswordError>
-                        <div class="invalid-feedback">Confirm Password should match Password</div>
+                        <div class="invalid-feedback">{{ 'form.validations.confirm-password-match' | transloco }}</div>
                     </ng-template>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <div class="form-group col-md-6">
-                    <label for="d">Birth Date</label>
+                    <label for="d">{{ 'form.labels.birth-date' | transloco }}</label>
                     <div class="input-group">
                         <input type="text" ngbDatepicker class="form-control" #d="ngbDatepicker" formControlName="birthDate"
                             [class.is-invalid]="submitted && addProfileForm.controls['birthDate'].errors">
                         <button class="btn btn-outline-info" (click)="d.toggle()" type="button">
                             <i class="d-flex align-items-center" i-bs name="calendar-event"></i>
                         </button>
-                        <div class="invalid-feedback">Birth Date is required</div>
+                        <div class="invalid-feedback">{{ 'form.validations.required.birth-date' | transloco }}</div>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="daysBeforeNoticeInput">Days Before Notice</label>
+                    <label for="daysBeforeNoticeInput">{{ 'form.labels.days-before-notice' | transloco }}</label>
                     <input type="number" class="form-control" id="daysBeforeNoticeInput" formControlName="daysBeforeNotice"
                         [class.is-invalid]="submitted && addProfileForm.controls['daysBeforeNotice'].errors">
                     <div class="invalid-feedback" *ngIf="addProfileForm.controls['daysBeforeNotice'].errors?.['required']; else numberError">
-                        Days Before Notice is required</div>
+                        {{ 'form.validations.required.days-before-notice' | transloco }}</div>
                     <ng-template #numberError>
-                        <div class="invalid-feedback">Days Before Notice should be at least 2</div>
+                        <div class="invalid-feedback">{{ 'form.validations.days-before-notice-minimum' | transloco }}</div>
                     </ng-template>
                 </div>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary" type="submit">Add Profile</button>
+                <button class="btn btn-primary" type="submit">{{ 'create-profile.button' | transloco }}</button>
                 <div class="form-check form-switch ms-3">
                     <input class="form-check-input" type="checkbox" id="isAdminInput" formControlName="isAdmin">
-                    <label class="form-check-label" for="isAdminInput">Is Admin</label>
+                    <label class="form-check" for="isAdminInput">{{ 'form.labels.is-admin' | transloco }}</label>
                 </div>
             </div>
         </form>

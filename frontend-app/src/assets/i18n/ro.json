@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "tabs": {
+            "home":         "Acasa",
+            "profile-page": "Pagina de Profil",
+            "add-profile":  "Adauga Profil",
+            "login":        "Autentificare",
+            "logout":       "Iesi din Cont"
+        },
+        "logout-action":    "Iesi din Cont"
+    },
+    "footer":   "© PixelData {{year}}",
+    "home": {
+        "header":           "ANGAJATI",
+        "columns": {
+            "id":           "Id",
+            "first-name":   "Prenume",
+            "last-name":    "Nume de Familie",
+            "email":        "Email",
+            "actions":      "Actiuni"
+        }
+    },
+    "form": {
+        "labels": {
+            "first-name":           "Prenume",
+            "last-name":            "Nume de Familie",
+            "username":             "Nume de Utilizator",
+            "email":                "Email",
+            "change-password":      "Schimba Parola",
+            "password":             "Parola",
+            "confirm-password":     "Confirma Parola",
+            "birth-date":           "Data de Nastere",
+            "days-before-notice":   "Zile Inainte de Notificare",
+            "is-admin":             "Este Admin"
+        },
+        "validations": {
+            "required": {
+                "first-name":           "Prenumele este necesar",
+                "last-name":            "Numele de Familie este necesar",
+                "username":             "Numele de Utilizator este necesar",
+                "email":                "Email-ul este necesar",
+                "password":             "Parola este necesar",
+                "confirm-password":     "Confirmarea Parolei este necesara",
+                "birth-date":           "Data de Nastere este necesar",
+                "days-before-notice":   "Zilele Inainte de Notificare sunt necesare"
+            },
+            "password": {
+                "minimum-length":   "Parola trebuie sa aiba minimum 8 caractere",
+                "lowercase":        "Parola trebuie sa aiba cel putin o litera mica",
+                "uppercase":        "Parola trebuie sa aiba cel putin o majuscula",
+                "digit":            "Parola trebuie sa aiba cel putin o cifra"
+            },
+            "email":                        "Te rog introdu un email valid",
+            "confirm-password-match":       "Confirmarea Parolei trebuie sa coincida cu Parola",
+            "days-before-notice-minimum":   "Zilele Inainte de Notificare trebuie sa fie cel putin 2"
+        }
+    },
+    "create-profile": {
+        "header":   "ADAUGA PROFIL",
+        "button":   "Adauga Profil"
+    },
+    "edit-profile": {
+        "header":       "MODIFICA PROFILUL PERSOANEI {{firstName}} {{lastName}}",
+        "button":       "Modifica Profilul",
+        "cancel-button":"Anulare"
+    },
+    "login": {
+        "header":   "AUTENTIFICARE",
+        "button":   "Autentificare"
+    },
+    "profile": {
+        "header":   "PROFILUL PERSOANEI {{firstName}} {{lastName}}",
+        "rows": {
+            "username":             "Nume de Utilizator",
+            "email":                "Email",
+            "birth-date":           "Data de Nastere",
+            "days-before-notice":   "Zile Inainte de Notificare",
+            "is-admin":             "Este Admin"
+        }
+    },
+    "modal": {
+        "delete-title":     "Stergi persoana?",
+        "delete-body":      "Esti sigur ca vrei sa stergi persoana pe nume ",
+        "logout-title":     "Iesi din Cont?",
+        "logout-body":      "Esti sigur ca vrei sa ",
+        "cancel-button":    "Anulare",
+        "confirm-button":   "Confirmare"
+    }
+}

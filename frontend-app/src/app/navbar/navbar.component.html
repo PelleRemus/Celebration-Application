@@ -1,32 +1,44 @@
 <div class="bg-secondary">
-    <div class="container"><img src="assets/banner.png" width="100%"></div>
+    <div class="container"><img src="assets/images/banner.png" width="100%"></div>
 </div>
 <app-modal #modal [modalConfig]="modalConfig">
-    Are you sure you want to <b>Logout</b>?
+    {{ 'modal.logout-body' | transloco }} <b>{{ 'navbar.logout-action' | transloco }}</b>?
 </app-modal>
 
 <div class="bg-info mt-1px mb-1">
     <div class="container">
-        <ul ngbNav class="nav-tabs pt-2">
+        <ul ngbNav class="navs pt-2">
             <li ngbNavItem class="d-flex align-items-end">
                 <a class="navbar-brand" routerLink="home">
-                    <img src="assets/logo.png" height="32px">
+                    <img src="assets/images/logo.png" height="32px">
                 </a>
             </li>
             <li ngbNavItem>
-                <a class="ms-3" ngbNavLink routerLink="home" routerLinkActive="active"><b>Home</b></a>
+                <a class="ms-3" ngbNavLink routerLink="home" routerLinkActive="active"><b>{{ 'navbar.tabs.home' | transloco }}</b></a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink routerLink="profile/current" routerLinkActive="active"><b>Profile Page</b></a>
+                <a ngbNavLink routerLink="profile/current" routerLinkActive="active"><b>{{ 'navbar.tabs.profile-page' | transloco }}</b></a>
             </li>
             <li ngbNavItem class="ms-auto" *ngIf="role == 'Admin'">
-                <a ngbNavLink routerLink="add-profile" routerLinkActive="active"><b>Add Profile</b></a>
+                <a ngbNavLink routerLink="add-profile" routerLinkActive="active"><b>{{ 'navbar.tabs.add-profile' | transloco }}</b></a>
             </li>
             <li ngbNavItem *ngIf="!role" class="ms-auto">
-                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>Login</b></a>
+                <a ngbNavLink routerLink="login" routerLinkActive="active"><b>{{ 'navbar.tabs.login' | transloco }}</b></a>
             </li>
             <li ngbNavItem *ngIf="role" [class.ms-auto]="role != 'Admin'">
-                <a ngbNavLink (click)="logout()"><b>Logout</b></a>
+                <a ngbNavLink (click)="logout()"><b>{{ 'navbar.tabs.logout' | transloco }}</b></a>
+            </li>
+            <li ngbNavItem class="d-flex align-items-end">
+                <button class="btn" [class.btn-secondary]="translocoService.getActiveLang() == 'ro'"
+                    (click)="changeLanguage('ro')">
+                    <img src="assets/images/ro.png" height="16px">
+                </button>
+            </li>
+            <li ngbNavItem class="d-flex align-items-end">
+                <button class="btn" [class.btn-secondary]="translocoService.getActiveLang() == 'en'"
+                    (click)="changeLanguage('en')">
+                    <img src="assets/images/en.png" height="16px">
+                </button>
             </li>
         </ul>
     </div>

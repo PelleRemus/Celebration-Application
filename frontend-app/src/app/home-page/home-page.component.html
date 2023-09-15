@@ -1,17 +1,17 @@
 <div class="container">
-    <h4 class="text-primary text-center p-2">EMPLOYEES</h4>
+    <h4 class="text-primary text-center p-2">{{ 'home.header' | transloco }}</h4>
     <app-modal #modal [modalConfig]="modalConfig">
-        Are you sure you want to delete person <b>{{toDelete?.firstName}} {{toDelete?.lastName}}</b>?
+        {{ 'modal.delete-body' | transloco }} <b>{{toDelete?.firstName}} {{toDelete?.lastName}}</b>?
     </app-modal>
 
     <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th class="bg-secondary">Id</th>
-            <th class="bg-secondary">FirstName</th>
-            <th class="bg-secondary">LastName</th>
-            <th class="bg-secondary">Email</th>
-            <th class="bg-secondary" *ngIf="role == 'Admin'">Actions</th>
+            <th class="bg-secondary">{{ 'home.columns.id' | transloco }}</th>
+            <th class="bg-secondary">{{ 'home.columns.first-name' | transloco }}</th>
+            <th class="bg-secondary">{{ 'home.columns.last-name' | transloco }}</th>
+            <th class="bg-secondary">{{ 'home.columns.email' | transloco }}</th>
+            <th class="bg-secondary" *ngIf="role == 'Admin'">{{ 'home.columns.actions' | transloco }}</th>
           </tr>
         </thead>
         <tbody>

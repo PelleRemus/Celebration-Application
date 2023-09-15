@@ -1,0 +1,89 @@
+{
+    "navbar": {
+        "tabs": {
+            "home":         "Home",
+            "profile-page": "Profile Page",
+            "add-profile":  "Add Profile",
+            "login":        "Login",
+            "logout":       "Logout"
+        },
+        "logout-action":    "Logout"
+    },
+    "footer":   "© PixelData {{year}}",
+    "home": {
+        "header":           "EMPLOYEES",
+        "columns": {
+            "id":           "Id",
+            "first-name":   "First Name",
+            "last-name":    "Last Name",
+            "email":        "Email",
+            "actions":      "Actions"
+        }
+    },
+    "form": {
+        "labels": {
+            "first-name":           "First Name",
+            "last-name":            "Last Name",
+            "username":             "Username",
+            "email":                "Email",
+            "change-password":      "Change Password",
+            "password":             "Password",
+            "confirm-password":     "Confirm Password",
+            "birth-date":           "Birth Date",
+            "days-before-notice":   "Days Before Notice",
+            "is-admin":             "Is Admin"
+        },
+        "validations": {
+            "required": {
+                "first-name":           "First Name is required",
+                "last-name":            "Last Name is required",
+                "username":             "Username is required",
+                "email":                "Email is required",
+                "password":             "Password is required",
+                "confirm-password":     "Confirm Password is required",
+                "birth-date":           "Birth Date is required",
+                "days-before-notice":   "Days Before Notice is required"
+            },
+            "password": {
+                "minimum-length":   "Password should have at least 8 characters",
+                "lowercase":        "Password must have at least a lowercase letter",
+                "uppercase":        "Password must have at least an uppercase letter",
+                "digit":            "Password must have at least a digit"
+            },
+            "email":                        "Please insert a valid email",
+            "confirm-password-match":       "Confirm Password should match Password",
+            "days-before-notice-minimum":   "Days Before Notice should be at least 2"
+        }
+    },
+    "create-profile": {
+        "header":   "ADD PROFILE",
+        "button":   "Add Profile"
+    },
+    "edit-profile": {
+        "header":       "EDIT {{firstName}} {{lastName}}'S PROFILE",
+        "button":       "Edit Profile",
+        "cancel-button":"Cancel"
+    },
+    "login": {
+        "header":   "LOG IN",
+        "button":   "Log in"
+    },
+    "profile": {
+        "header":   "{{firstName}} {{lastName}}'S PROFILE",
+        "rows": {
+            "username":             "Username",
+            "email":                "Email",
+            "birth-date":           "Birth Date",
+            "days-before-notice":   "Days Before Notice",
+            "is-admin":             "Is Admin"
+        }
+    },
+    "modal": {
+        "delete-title":     "Delete person?",
+        "delete-body":      "Are you sure you want to delete person ",
+        "logout-title":     "Logout?",
+        "logout-body":      "Are you sure you want to ",
+        "cancel-button":    "Cancel",
+        "confirm-button":   "Confirm"
+    }
+}

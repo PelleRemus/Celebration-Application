@@ -28,6 +28,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ToastsContainerComponent } from './toasts-container/toasts-container.component';
 import { ToastService } from './services/toast.service';
 import { ModalComponent } from './modal/modal.component';
+import { TranslocoRootModule } from './services/transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ModalComponent } from './modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    NgxBootstrapIconsModule.pick(icons)
+    NgxBootstrapIconsModule.pick(icons),
+    TranslocoRootModule
   ],
   providers: [
     PeopleService,

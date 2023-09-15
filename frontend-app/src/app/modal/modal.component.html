@@ -10,12 +10,12 @@
       <ng-content></ng-content>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-info" (click)="dismiss()"
+        <button type="button" class="btn btn-info" (click)="dismiss()"
               *ngIf="modalConfig.hideDismissButton === undefined || !modalConfig.hideDismissButton()"
               [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
         {{ modalConfig.dismissButtonLabel }}
         </button>
-        <button type="button" class="btn btn-outline-primary ms-auto" (click)="close()"
+        <button type="button" class="btn btn-primary ms-auto" (click)="close()"
                 *ngIf="modalConfig.hideCloseButton === undefined || !modalConfig.hideCloseButton()"
                 [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
           {{ modalConfig.closeButtonLabel }}
