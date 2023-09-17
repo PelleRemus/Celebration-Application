@@ -2,6 +2,7 @@ using BackendAPI.Validators;
 using Business.Implementations;
 using Business.Interfaces;
 using Common.DTOs;
+using Common.Helpers;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -67,7 +68,7 @@ namespace BackendAPI
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
                                     b => b.MigrationsAssembly("BackendAPI"));
-            });
+            }, ServiceLifetime.Singleton);
 
             // Authentication
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -87,12 +88,19 @@ namespace BackendAPI
                 });
 
             // Repositories
-            builder.Services.AddScoped<IPersonRepo, PersonRepo>();
+            builder.Services.AddSingleton<IPersonRepo, PersonRepo>();
 
             // Services
-            builder.Services.AddScoped<IPersonService, PersonService>();
-            builder.Services.AddScoped<INotificationsService, NotificationsService>();
-            builder.Services.AddScoped<ILoginService, LoginService>();
+            builder.Services.AddSingleton<IPersonService, PersonService>();
+            builder.Services.AddSingleton<INotificationsService, NotificationsService>();
+            builder.Services.AddSingleton<ILoginService, LoginService>();
+
+            builder.Services.AddHostedService<ScheduleJob>();
+            builder.Services.AddCronJob<ScheduleJob>(c =>
+            {
+                c.TimeZoneInfo = TimeZoneInfo.Local;
+                c.CronExpression = @"0 8 * * *";
+            });
 
             // Validators
             builder.Services.AddScoped<IValidator<InputPersonDTO>, PersonValidator>();
